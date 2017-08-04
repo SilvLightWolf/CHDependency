@@ -1,19 +1,25 @@
-package com.slw.basic;
+package slw.basic;
 
 import com.laytonsmith.PureUtilities.SimpleVersion;
 import com.laytonsmith.PureUtilities.Version;
+import com.laytonsmith.abstraction.MCCommandSender;
+import com.laytonsmith.abstraction.MCConsoleCommandSender;
+import com.laytonsmith.abstraction.MCPlayer;
 import com.laytonsmith.abstraction.bukkit.entities.BukkitMCPlayer;
 import com.laytonsmith.annotations.api;
 import com.laytonsmith.core.Static;
 import com.laytonsmith.core.constructs.*;
+import com.laytonsmith.core.environments.CommandHelperEnvironment;
 import com.laytonsmith.core.environments.Environment;
 import com.laytonsmith.core.exceptions.CRE.CREThrowable;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import com.laytonsmith.core.functions.AbstractFunction;
-import com.slw.exceptions.UnknownAttributeException;
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
+import slw.exceptions.ConsoleCannotUseException;
+import slw.exceptions.UnknownAttributeException;
 
 /**
  * Created by User on 2017-08-03.
@@ -38,7 +44,15 @@ public class Attributes {
 
         public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException {
 
-            Player p = ((BukkitMCPlayer) Static.GetPlayer(args[0], t))._Player();
+            MCCommandSender player;
+            if(args.length == 0) player = env.getEnv(CommandHelperEnvironment.class).GetCommandSender();
+            else player = Static.GetPlayer(args[0], t);
+
+            if(player instanceof MCConsoleCommandSender)
+                throw new ConsoleCannotUseException(getName() + " is unavailable for Console.", t);
+
+            Player p = ((BukkitMCPlayer) ((MCPlayer) player))._Player();
+
             CArray retv = new CArray(t);
 
             if (args.length == 1) {
@@ -50,10 +64,12 @@ public class Attributes {
 
                     AttributeInstance attr = p.getAttribute(Attribute.values()[i]);
 
-                    arr.set("value", new CDouble(attr.getValue(), t), t);
+                    Bukkit.broadcastMessage(Attribute.values()[i].name()+"loading");
+
+                    arr.set("value", new CDouble(attr.getValue(), t), t); // NPE
                     arr.set("basevalue", new CDouble(attr.getBaseValue(), t), t);
                     arr.set("defaultvaulue", new CDouble(attr.getDefaultValue(), t), t);
-                    arr.set("name", new CString(args[1].val(), t), t);
+                    arr.set("name", new CString(attr.getAttribute().name(), t), t);
 
                     retv.push(arr, t);
 
@@ -93,7 +109,7 @@ public class Attributes {
         }
 
         public Integer[] numArgs() {
-            return new Integer[]{1, 2};
+            return new Integer[]{0, 1, 2};
         }
 
         public String docs() {

@@ -1,4 +1,4 @@
-package com.slw;
+package slw;
 
 import com.laytonsmith.PureUtilities.SimpleVersion;
 import com.laytonsmith.PureUtilities.Version;
