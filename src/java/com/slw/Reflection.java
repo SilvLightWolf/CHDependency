@@ -1,4 +1,4 @@
-package slw;
+package com.slw;
 
 import org.bukkit.Bukkit;
 
