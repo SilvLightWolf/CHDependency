@@ -10,12 +10,16 @@ import com.laytonsmith.core.constructs.Target;
 import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.player.PlayerAccounts;
 import com.sucy.skill.api.player.PlayerData;
+import com.sucy.skill.api.player.PlayerSkill;
 import com.sucy.skill.api.skills.Skill;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by User on 2017-08-10.
@@ -80,4 +84,5 @@ public class SkillAPIManage {
         if(cur == 1){ pa.setAccount(2); pa.setAccount(1); }
         else { pa.setAccount(1); pa.setAccount(cur); }
     }
+
 }
