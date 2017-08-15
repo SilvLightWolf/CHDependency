@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
  */
 public class SkillapiInterface {
 
-    /*public interface CHUFlagApplyInterface extends BindableEvent { }
+    public interface CHUFlagApplyInterface extends BindableEvent { }
 
     public interface CHUFlagExpireInterface extends BindableEvent { }
 
@@ -28,7 +28,7 @@ public class SkillapiInterface {
 
     public interface CHUParticleProjectileLandInterface extends BindableEvent { }
 
-    public interface CHUParticleProjectileLaunchInterface extends BindableEvent { }*/
+    public interface CHUParticleProjectileLaunchInterface extends BindableEvent { }
 
     public interface CHUPhysicalDamageInterface extends BindableEvent {
 
@@ -64,7 +64,7 @@ public class SkillapiInterface {
 
     }
 
-    /*public interface CHUPlayerClassChangeInterface extends BindableEvent { }
+    public interface CHUPlayerClassChangeInterface extends BindableEvent { }
 
     public interface CHUComboFinishInterface extends BindableEvent { }
 
@@ -74,7 +74,13 @@ public class SkillapiInterface {
 
     public interface CHUPlayerGainSkillPointsInterface extends BindableEvent { } //¡Ú
 
-    public interface CHUPlayerLandInterface extends BindableEvent { } //¡Ú
+    public interface CHUPlayerLandInterface extends BindableEvent {
+
+        public double getDistance();
+        public Player getPlayer();
+        public boolean isAsync();
+
+    } //¡Ú
 
     public interface CHUPlayerLevelUpInterface extends BindableEvent { }
 
@@ -82,7 +88,7 @@ public class SkillapiInterface {
 
     public interface CHUPlayerManaLostInterface extends BindableEvent { }
 
-    public interface CHUPlayerRefundAttributeInterface extends BindableEvent { }*/
+    public interface CHUPlayerRefundAttributeInterface extends BindableEvent { }
 
     public interface CHUPlayerSkillDowngradeInterface extends BindableEvent {
 
@@ -94,16 +100,50 @@ public class SkillapiInterface {
 
     }
 
-    /*public interface CHUPlayerSkillUnlockInterface extends BindableEvent { }
+    public interface CHUPlayerSkillUnlockInterface extends BindableEvent { }
 
-    public interface CHUPlayerSkillUpgradeInterface extends BindableEvent { } //¡Ú
+    public interface CHUPlayerSkillUpgradeInterface extends BindableEvent {
+
+        public PlayerSkill getUpgradedSkill();
+        public PlayerData getPlayerData();
+        public int getCost();
+        public boolean isAsynchronous();
+        public void setCancelled(boolean b);
+
+    }
 
     public interface CHUPlayerUpAttributeInterface extends BindableEvent { }
 
-    public interface CHUSkillDamageInterface extends BindableEvent { } //¡Ú
+    public interface CHUSkillDamageInterface extends BindableEvent {
 
-    public interface CHUSkillHealInterface extends BindableEvent { } //¡Ú
+        public boolean isAsynchronous();
+        public double getDamage();
+        public LivingEntity getDamager();
+        public LivingEntity getTarget();
+        public void setCancelled(boolean b);
+        public void setDamage(double v);
 
-    public interface CHUTrueDamageIntrerface extends BindableEvent { } //¡Ú*/
+    }
+
+    public interface CHUSkillHealInterface extends BindableEvent {
+
+        public boolean isAsynchronous();
+        public double getAmount();
+        public LivingEntity getHealer();
+        public LivingEntity getTarget();
+        public void setCancelled(boolean b);
+        public void setAmount(double v);
+
+    }
+
+    public interface CHUTrueDamageInterface extends BindableEvent {
+
+        public boolean isAsynchronous();
+        public double getDamage();
+        public LivingEntity getDamager();
+        public LivingEntity getTarget();
+        public void setCancelled(boolean b);
+        public void setDamage(double v);
+    }
 
 }

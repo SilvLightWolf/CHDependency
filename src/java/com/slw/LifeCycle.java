@@ -14,6 +14,7 @@ import com.laytonsmith.commandhelper.CommandHelperPlugin;
 import com.laytonsmith.core.environments.CommandHelperEnvironment;
 import com.laytonsmith.core.extensions.AbstractExtension;
 import com.laytonsmith.core.extensions.MSExtension;
+import com.slw.skillapi.SkillAPIManage;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ShapelessRecipe;
 
@@ -30,17 +31,21 @@ public class LifeCycle extends AbstractExtension {
     @Override
     public void onStartup(){
 
+        SkillAPIManage.register();
         System.out.println("CH ULTRA " + getVersion() + " ENABLED!");
 
-        CHUListener.register();
+        CHUListener.BasicEventListener.register();
 
 
     }
 
     @Override
     public void onShutdown(){
+
+        SkillAPIManage.unregister();
+
         System.out.println("CH ULTRA " + getVersion() + " DISABLED!");
-        CHUListener.unregister();
+        CHUListener.BasicEventListener.unregister();
     }
 
     public Version getVersion() {

@@ -17,6 +17,7 @@ import com.sucy.skill.api.player.PlayerData;
 import com.sucy.skill.api.player.PlayerSkill;
 import com.sucy.skill.api.skills.Skill;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 /**
  * Created by User on 2017-08-10.
@@ -40,6 +41,8 @@ public class Skills {
         }
 
         public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException {
+
+            if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
 
             CArray retv = new CArray(t);
 
@@ -93,6 +96,8 @@ public class Skills {
 
         public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException {
 
+            if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
+
             OfflinePlayer p = ((BukkitMCPlayer) Static.GetPlayer(args[0].val(), t))._Player();
             if(p == null) return CBoolean.FALSE;
             PlayerData pd = SkillAPI.getPlayerAccountData(p).getActiveData();
@@ -142,6 +147,8 @@ public class Skills {
 
         public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException {
 
+            if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
+
             OfflinePlayer p = ((BukkitMCPlayer) Static.GetPlayer(args[0].val(), t))._Player();
             if(p == null) return CBoolean.FALSE;
 
@@ -172,6 +179,54 @@ public class Skills {
 
         public String docs() {
             return "boolean (playerName, skillName[, Level]) give Skill to player, but this skill is removed after reloading.";
+        }
+    }
+
+    @api
+    public static class CHU_refresh extends AbstractFunction {
+
+        @SuppressWarnings("unchecked")
+        public Class<? extends CREThrowable>[] thrown() {
+            return new Class[0];
+        }
+
+        public boolean isRestricted() {
+            return false;
+        }
+
+        public Boolean runAsync() {
+            return null;
+        }
+
+        public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException {
+
+            if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
+
+            if(args[0] instanceof CArray){
+                CArray arr =(CArray) args[0];
+                for(Construct c : arr.asList()){
+                    Player p = ((BukkitMCPlayer)Static.GetPlayer(c.getValue(), t))._Player();
+                    SkillAPIManage.refreshAccount(p);
+                }
+                return CBoolean.TRUE;
+            }
+            return CBoolean.FALSE;
+        }
+
+        public Version since() {
+            return new SimpleVersion(1, 0, 0);
+        }
+
+        public String getName() {
+            return "chu_skillapi_refresh";
+        }
+
+        public Integer[] numArgs() {
+            return new Integer[]{ 1 };
+        }
+
+        public String docs() {
+            return "boolean (playerArray) refresh player's skill.";
         }
     }
 

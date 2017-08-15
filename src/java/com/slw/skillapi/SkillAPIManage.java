@@ -3,15 +3,18 @@ package com.slw.skillapi;
 import com.laytonsmith.abstraction.MCLocation;
 import com.laytonsmith.abstraction.MCWorld;
 import com.laytonsmith.core.ObjectGenerator;
+import com.laytonsmith.core.Static;
 import com.laytonsmith.core.constructs.CArray;
 import com.laytonsmith.core.constructs.CString;
 import com.laytonsmith.core.constructs.Construct;
 import com.laytonsmith.core.constructs.Target;
+import com.slw.CHUListener;
 import com.sucy.skill.SkillAPI;
 import com.sucy.skill.api.player.PlayerAccounts;
 import com.sucy.skill.api.player.PlayerData;
 import com.sucy.skill.api.player.PlayerSkill;
 import com.sucy.skill.api.skills.Skill;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -25,6 +28,22 @@ import java.util.List;
  * Created by User on 2017-08-10.
  */
 public class SkillAPIManage {
+
+    public static boolean skillapiPlay = false;
+
+    public static void register(){
+        if(Bukkit.getServer().getPluginManager().isPluginEnabled("SkillAPI")) {
+            CHUListener.SkillAPIEventListener.register();
+            System.out.println("[CHU Ultra] Success hooked SkillAPI!");
+            skillapiPlay = true;
+        }else{
+            System.out.println("[CH Ultra] SkillAPI Function and Events diabled.");
+        }
+    }
+
+    public static void unregister(){
+        if(skillapiPlay) CHUListener.SkillAPIEventListener.unregister();
+    }
 
     public static CArray getSkillArray(Skill sk){
 

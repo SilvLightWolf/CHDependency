@@ -4,16 +4,14 @@ import com.laytonsmith.PureUtilities.SimpleVersion;
 import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.abstraction.bukkit.entities.BukkitMCPlayer;
 import com.laytonsmith.annotations.api;
-import com.laytonsmith.core.constructs.CBoolean;
-import com.laytonsmith.core.constructs.CDouble;
-import com.laytonsmith.core.constructs.Construct;
-import com.laytonsmith.core.constructs.Target;
+import com.laytonsmith.core.constructs.*;
 import com.laytonsmith.core.environments.CommandHelperEnvironment;
 import com.laytonsmith.core.environments.Environment;
 import com.laytonsmith.core.exceptions.CRE.CREThrowable;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import com.laytonsmith.core.functions.AbstractFunction;
 import com.slw.DataHandling;
+import com.slw.skillapi.SkillAPIManage;
 import com.sucy.skill.dynamic.DynamicSkill;
 import org.bukkit.entity.Player;
 
@@ -42,6 +40,8 @@ public class Values {
         }
 
         public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException {
+
+            if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
 
             Player p = ((BukkitMCPlayer)env.getEnv(CommandHelperEnvironment.class).GetPlayer())._Player();
             Object o = DynamicSkill.getCastData(p).get(args[1].val());
@@ -85,6 +85,8 @@ public class Values {
         }
 
         public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException {
+
+            if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
 
             Player p = ((BukkitMCPlayer)env.getEnv(CommandHelperEnvironment.class).GetPlayer())._Player();
             HashMap<String, Object> data = DynamicSkill.getCastData(p);
