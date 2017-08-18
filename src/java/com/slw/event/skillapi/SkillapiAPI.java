@@ -190,42 +190,6 @@ public class SkillapiAPI {
             e.setCancelled(b);
         }
     }
-
-    public static class CHUPlayerClassChangeEvent implements SkillapiInterface.CHUPlayerClassChangeInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
-    public static class CHUComboFinishEvent implements SkillapiInterface.CHUComboFinishInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
-    public static class CHUPlayerExperienceGainEvent implements SkillapiInterface.CHUPlayerExperienceGainInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
-    public static class CHUPlayerExperienceLostEvent implements SkillapiInterface.CHUPlayerExperienceLostInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
-    public static class CHUPlayerGainSkillPointsEvent implements SkillapiInterface.CHUPlayerGainSkillPointsInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    } //¡Ú
-
     public static class CHUPlayerLandEvent implements SkillapiInterface.CHUPlayerLandInterface {
         PlayerLandEvent e;
 
@@ -247,34 +211,6 @@ public class SkillapiAPI {
 
         public boolean isAsync() {
             return e.isAsynchronous();
-        }
-    }
-
-    public static class CHUPlayerLevelUpEvent implements SkillapiInterface.CHUPlayerLevelUpInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
-    public static class CHUPlayerManaGainEvent implements SkillapiInterface.CHUPlayerManaGainInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
-    public static class CHUPlayerManaLostEvent implements SkillapiInterface.CHUPlayerManaLostInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
-    public static class CHUPlayerRefundAttributeEvent implements SkillapiInterface.CHUPlayerRefundAttributeInterface {
-
-        public Object _GetObject() {
-            return null;
         }
     }
 
@@ -311,13 +247,6 @@ public class SkillapiAPI {
         }
     }
 
-    public static class CHUPlayerSkillUnlockEvent implements SkillapiInterface.CHUPlayerSkillUnlockInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
     public static class CHUPlayerSkillUpgradeEvent implements SkillapiInterface.CHUPlayerSkillUpgradeInterface {
         PlayerSkillUpgradeEvent e;
 
@@ -349,13 +278,6 @@ public class SkillapiAPI {
             e.setCancelled(b);
         }
 
-    }
-
-    public static class CHUPlayerUpAttributeEvent implements SkillapiInterface.CHUPlayerUpAttributeInterface {
-
-        public Object _GetObject() {
-            return null;
-        }
     }
 
     public static class CHUSkillDamageEvent implements SkillapiInterface.CHUSkillDamageInterface {

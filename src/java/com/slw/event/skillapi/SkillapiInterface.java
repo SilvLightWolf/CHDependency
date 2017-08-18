@@ -64,31 +64,14 @@ public class SkillapiInterface {
 
     }
 
-    public interface CHUPlayerClassChangeInterface extends BindableEvent { }
-
-    public interface CHUComboFinishInterface extends BindableEvent { }
-
-    public interface CHUPlayerExperienceGainInterface extends BindableEvent { }
-
-    public interface CHUPlayerExperienceLostInterface extends BindableEvent { }
-
-    public interface CHUPlayerGainSkillPointsInterface extends BindableEvent { } //¡Ú
-
     public interface CHUPlayerLandInterface extends BindableEvent {
 
         public double getDistance();
         public Player getPlayer();
         public boolean isAsync();
 
-    } //¡Ú
+    }
 
-    public interface CHUPlayerLevelUpInterface extends BindableEvent { }
-
-    public interface CHUPlayerManaGainInterface extends BindableEvent { }
-
-    public interface CHUPlayerManaLostInterface extends BindableEvent { }
-
-    public interface CHUPlayerRefundAttributeInterface extends BindableEvent { }
 
     public interface CHUPlayerSkillDowngradeInterface extends BindableEvent {
 
@@ -100,8 +83,6 @@ public class SkillapiInterface {
 
     }
 
-    public interface CHUPlayerSkillUnlockInterface extends BindableEvent { }
-
     public interface CHUPlayerSkillUpgradeInterface extends BindableEvent {
 
         public PlayerSkill getUpgradedSkill();
@@ -111,9 +92,6 @@ public class SkillapiInterface {
         public void setCancelled(boolean b);
 
     }
-
-    public interface CHUPlayerUpAttributeInterface extends BindableEvent { }
-
     public interface CHUSkillDamageInterface extends BindableEvent {
 
         public boolean isAsynchronous();

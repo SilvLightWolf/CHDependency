@@ -9,11 +9,9 @@ import com.laytonsmith.core.events.BindableEvent;
 import com.laytonsmith.core.events.Driver;
 import com.laytonsmith.core.exceptions.EventException;
 import com.laytonsmith.core.exceptions.PrefilterNonMatchException;
-import com.laytonsmith.core.functions.AbstractFunction;
 import com.slw.DataHandling;
-import com.slw.skillapi.SkillAPIManage;
+import com.slw.compatibility.SkillAPIManage;
 import com.sucy.skill.api.player.PlayerAccounts;
-import com.sucy.skill.api.player.PlayerData;
 import org.bukkit.entity.LivingEntity;
 
 import java.util.HashMap;

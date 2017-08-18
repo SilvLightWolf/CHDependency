@@ -12,11 +12,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.AreaEffectCloudApplyEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
 
 /**
  * Created by User on 2017-08-04.
  */
-public class CHUListener{
+public class CHUListener {
 
     public static class BasicEventListener implements Listener {
 
@@ -30,12 +32,26 @@ public class CHUListener{
 
         public static void unregister() {
             AreaEffectCloudApplyEvent.getHandlerList().unregister(listener);
+            InventoryMoveItemEvent.getHandlerList().unregister(listener);
+            InventoryPickupItemEvent.getHandlerList().unregister(listener);
         }
 
         @EventHandler
         public void onAreaEffectCloudApplyEvent(AreaEffectCloudApplyEvent e) {
             EventUtils.TriggerListener(Driver.EXTENSION, "chu_area_effect_cloud_apply",
                     new BasicAPI.CHUAreaEffectCloudApplyEvent(e));
+        }
+
+        @EventHandler
+        public void onInventoryMoveItemEvent(InventoryMoveItemEvent e){
+            EventUtils.TriggerListener(Driver.EXTENSION, "chu_inventory_move_item",
+                    new BasicAPI.CHUInventoryMoveItemEvent(e));
+        }
+
+        @EventHandler
+        public void onInventoryPickupItemEvent(InventoryPickupItemEvent e){
+            EventUtils.TriggerListener(Driver.EXTENSION, "chu_inventory_pickup_item",
+                    new BasicAPI.CHUInventoryPickupItemEvent(e));
         }
 
     }
@@ -45,7 +61,7 @@ public class CHUListener{
         private static SkillAPIEventListener listener;
 
         public static void register() {
-            if(listener == null)
+            if (listener == null)
                 listener = new SkillAPIEventListener();
             CommandHelperPlugin.self.registerEvents(listener);
         }
@@ -120,7 +136,20 @@ public class CHUListener{
         }
     }
 
+    public static class BetonQuestEventListener implements Listener {
 
+        private static BetonQuestEventListener listener;
+
+        public static void register() {
+            if (listener == null)
+                listener = new BetonQuestEventListener();
+            CommandHelperPlugin.self.registerEvents(listener);
+        }
+
+        public static void unregister() {
+
+        }
+    }
 
 
 }

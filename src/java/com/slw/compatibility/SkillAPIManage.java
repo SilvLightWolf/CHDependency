@@ -1,4 +1,4 @@
-package com.slw.skillapi;
+package com.slw.compatibility;
 
 import com.laytonsmith.abstraction.MCLocation;
 import com.laytonsmith.abstraction.MCWorld;
@@ -37,7 +37,7 @@ public class SkillAPIManage {
             System.out.println("[CHU Ultra] Success hooked SkillAPI!");
             skillapiPlay = true;
         }else{
-            System.out.println("[CH Ultra] SkillAPI Function and Events diabled.");
+            System.out.println("[CH Ultra] SkillAPI's Function and Events diabled.");
         }
     }
 

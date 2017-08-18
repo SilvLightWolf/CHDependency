@@ -11,12 +11,11 @@ import com.laytonsmith.core.exceptions.CRE.CREThrowable;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import com.laytonsmith.core.functions.AbstractFunction;
 import com.slw.DataHandling;
-import com.slw.skillapi.SkillAPIManage;
+import com.slw.compatibility.SkillAPIManage;
 import com.sucy.skill.dynamic.DynamicSkill;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * Created by User on 2017-08-10.
