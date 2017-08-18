@@ -19,31 +19,6 @@ import java.util.List;
 
 public class BasicAPI {
 
-    public static class CHUAreaEffectCloudApplyEvent implements BasicInterface.CHUAreaEffectCloudApplyInterface {
-
-        AreaEffectCloudApplyEvent e;
-
-        public CHUAreaEffectCloudApplyEvent(AreaEffectCloudApplyEvent e) {
-            this.e = e;
-        }
-
-        public List<LivingEntity> getEntities() {
-            return e.getAffectedEntities();
-        }
-
-        public AreaEffectCloud getCloud() {
-            return e.getEntity();
-        }
-
-        public EntityType getEntityType() {
-            return e.getEntityType();
-        }
-
-        public Object _GetObject() {
-            return null;
-        }
-    }
-
     public static class CHUInventoryMoveItemEvent implements BasicInterface.CHUInventoryMoveItemInterface {
 
         InventoryMoveItemEvent e;

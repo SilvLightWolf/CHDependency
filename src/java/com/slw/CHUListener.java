@@ -4,7 +4,6 @@ import com.comphenix.protocol.events.PacketEvent;
 import com.laytonsmith.commandhelper.CommandHelperPlugin;
 import com.laytonsmith.core.events.Driver;
 import com.laytonsmith.core.events.EventUtils;
-import com.laytonsmith.libs.com.jcraft.jsch.Packet;
 import com.slw.event.basic.BasicAPI;
 import com.slw.event.skillapi.SkillapiAPI;
 import com.sucy.skill.api.event.*;
@@ -31,15 +30,8 @@ public class CHUListener {
         }
 
         public static void unregister() {
-            AreaEffectCloudApplyEvent.getHandlerList().unregister(listener);
             InventoryMoveItemEvent.getHandlerList().unregister(listener);
             InventoryPickupItemEvent.getHandlerList().unregister(listener);
-        }
-
-        @EventHandler
-        public void onAreaEffectCloudApplyEvent(AreaEffectCloudApplyEvent e) {
-            EventUtils.TriggerListener(Driver.EXTENSION, "chu_area_effect_cloud_apply",
-                    new BasicAPI.CHUAreaEffectCloudApplyEvent(e));
         }
 
         @EventHandler

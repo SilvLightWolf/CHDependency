@@ -28,59 +28,6 @@ import static com.slw.DataHandling.inventoryToArray;
 public class BasicDriver {
 
     @api
-    public static class CHUAreaEffectCloudApplyAPI extends AbstractEvent {
-        public String getName() {
-            return "chu_area_effect_cloud_apply";
-        }
-
-        public String docs() {
-            return "{}";
-        }
-
-        public Version since() {
-            return new SimpleVersion(1, 0, 0);
-        }
-
-        public boolean matches(Map<String, Construct> map, BindableEvent event) throws PrefilterNonMatchException {
-            return true;
-        }
-
-        public BindableEvent convert(CArray cArray, Target target) {
-            return null;
-        }
-
-        public Map<String, Construct> evaluate(BindableEvent event) throws EventException {
-
-            if (event instanceof BasicInterface.CHUAreaEffectCloudApplyInterface) {
-
-                BasicInterface.CHUAreaEffectCloudApplyInterface e = (BasicInterface.CHUAreaEffectCloudApplyInterface) event;
-                Map<String, Construct> retv = new HashMap<String, Construct>();
-
-                CArray entities = new CArray(Target.UNKNOWN);
-
-                for (LivingEntity entity : e.getEntities())
-                    entities.push(Construct.GetConstruct(entity.getUniqueId()), Target.UNKNOWN);
-
-                retv.put("entities", entities);
-                retv.put("entity_type", Construct.GetConstruct(e.getEntityType().name()));
-
-                return retv;
-
-            }
-
-            return null;
-        }
-
-        public Driver driver() {
-            return Driver.EXTENSION;
-        }
-
-        public boolean modifyEvent(String s, Construct construct, BindableEvent bindableEvent) {
-            return false;
-        }
-    }
-
-    @api
     public static class CHUInventoryMoveItemAPI extends AbstractEvent {
 
         public String getName() {

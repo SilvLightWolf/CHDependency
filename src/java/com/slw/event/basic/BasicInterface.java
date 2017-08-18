@@ -16,14 +16,6 @@ import java.util.List;
 
 public class BasicInterface {
 
-    public interface CHUAreaEffectCloudApplyInterface extends BindableEvent {
-
-        public List<LivingEntity> getEntities();
-        public AreaEffectCloud getCloud();
-        public EntityType getEntityType();
-
-    }
-
     public interface CHUInventoryMoveItemInterface extends BindableEvent {
 
         public Inventory getDestination();
