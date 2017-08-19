@@ -12,12 +12,16 @@ public class BetonQuestManage {
 
     public static void register(){
         if(Bukkit.getServer().getPluginManager().isPluginEnabled("BetonQuest")) {
-            CHUListener.SkillAPIEventListener.register();
+            CHUListener.BetonQuestEventListener.register();
             System.out.println("[CHU Ultra] Success hooked BetonQuest!");
             betonquestPlay = true;
         }else{
             System.out.println("[CH Ultra] Betonquest's Function and Events diabled.");
         }
+    }
+
+    public static void unregister(){
+        if(betonquestPlay) CHUListener.BetonQuestEventListener.unregister();
     }
 
 }

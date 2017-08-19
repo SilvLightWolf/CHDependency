@@ -15,8 +15,7 @@ import com.laytonsmith.core.constructs.*;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
+import org.bukkit.block.*;
 import org.bukkit.inventory.Inventory;
 
 import java.util.Iterator;
@@ -26,36 +25,36 @@ import java.util.Iterator;
  */
 public class DataHandling {
 
-    public static boolean isNumeric(Object num){
+    public static boolean isNumeric(Object num) {
         return isNumeric(new CString(num.toString(), Target.UNKNOWN));
     }
 
-    public static boolean isNumeric(Construct num){
+    public static boolean isNumeric(Construct num) {
         boolean numeric = true;
-        try{
+        try {
             Static.getNumber(num, Target.UNKNOWN);
-        } catch (ConfigRuntimeException e){
+        } catch (ConfigRuntimeException e) {
             numeric = false;
         }
         return numeric;
     }
 
-    public static CArray inventoryToArray(Inventory inv){
-        return(inventoryToArray(new BukkitMCInventory(inv)));
+    public static CArray inventoryToArray(Inventory inv) {
+        return (inventoryToArray(new BukkitMCInventory(inv)));
     }
 
-    public static CArray inventoryToArray(MCInventory inv){
+    public static CArray inventoryToArray(MCInventory inv) {
 
         CArray array = new CArray(Target.UNKNOWN);
 
         CArray inventory = new CArray(Target.UNKNOWN);
-        for(int i = 0; i < inv.getSize(); i++)
+        for (int i = 0; i < inv.getSize(); i++)
             inventory.push(ObjectGenerator.GetGenerator().item(inv.getItem(i), Target.UNKNOWN), Target.UNKNOWN);
 
         CArray viewers = new CArray(Target.UNKNOWN);
         Iterator it = inv.getViewers().iterator();
-        while(it.hasNext()){
-            MCHumanEntity he = (MCHumanEntity)it.next();
+        while (it.hasNext()) {
+            MCHumanEntity he = (MCHumanEntity) it.next();
             viewers.push(Construct.GetConstruct(he.getName()), Target.UNKNOWN);
         }
 
@@ -65,9 +64,9 @@ public class DataHandling {
         array.set("type", inv.getType().name());
         array.set("inventorysize", String.valueOf(inv.getSize()));
         array.set("inventorytitle", inv.getTitle());
-        Object holder = ((BukkitMCInventoryHolder)inv.getHolder()).getHandle();
-        if(holder instanceof BlockState){
-            BlockState bs = (BlockState)holder;
+        Object holder = ((BukkitMCInventoryHolder) inv.getHolder()).getHandle();
+        if (holder instanceof BlockState) {
+            BlockState bs = (BlockState) holder;
             array.set("block", ObjectGenerator.GetGenerator().location(new BukkitMCLocation(bs.getBlock().getLocation())), Target.UNKNOWN);
         }
 

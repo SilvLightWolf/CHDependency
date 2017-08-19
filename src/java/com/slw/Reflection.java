@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 public class Reflection {
 
     private static String BV_PREFIX = Bukkit.getServer().getClass().getPackage().getName();
-    private static String NMSV_PREFIX = BV_PREFIX.replace("org.bukkit.craftbukki", "net.minecraft.server");
+    private static String NMSV_PREFIX = BV_PREFIX.replace("org.bukkit.craftbukkit", "net.minecraft.server");
     private static String VERSION = BV_PREFIX.replace("org.bukkit.craftbukkit", "").replace("", "");
 
     private static Class<?> getClassforName(String n){
@@ -26,5 +26,7 @@ public class Reflection {
     public static Class<?> getBukkitClass(String name){
         return getClassforName(BV_PREFIX + "" + name);
     }
+
+    public static Class<?> getBlockStateClass(String name){ return getClassforName(BV_PREFIX+".block.Craft"+name); }
 
 }

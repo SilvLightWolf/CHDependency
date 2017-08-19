@@ -4,6 +4,7 @@ import com.laytonsmith.PureUtilities.SimpleVersion;
 import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.core.extensions.AbstractExtension;
 import com.laytonsmith.core.extensions.MSExtension;
+import com.slw.compatibility.BetonQuestManage;
 import com.slw.compatibility.SkillAPIManage;
 
 /**
@@ -17,6 +18,7 @@ public class LifeCycle extends AbstractExtension {
     public void onStartup(){
 
         SkillAPIManage.register();
+        BetonQuestManage.register();
         System.out.println("CH ULTRA " + getVersion() + " ENABLED!");
 
         CHUListener.BasicEventListener.register();

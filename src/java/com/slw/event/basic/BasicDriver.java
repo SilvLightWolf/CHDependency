@@ -60,6 +60,7 @@ public class BasicDriver {
                 CArray init = inventoryToArray(e.getInitiator());
                 CArray source = inventoryToArray(e.getSource());
 
+                retv.put("event_type", Construct.GetConstruct(getName()));
                 retv.put("destination", dest);
                 retv.put("initiator", init);
                 retv.put("source", source);
@@ -114,6 +115,7 @@ public class BasicDriver {
                 BasicInterface.CHUInventoryPickupInterface e = (BasicInterface.CHUInventoryPickupInterface) event;
                 Map<String, Construct> retv = new HashMap<String, Construct>();
 
+                retv.put("event_type", Construct.GetConstruct(getName()));
                 retv.put("inventory", inventoryToArray(e.getInventory()));
                 retv.put("item", ObjectGenerator.GetGenerator().item(new BukkitMCItemStack(e.getItem().getItemStack()), Target.UNKNOWN));
 
