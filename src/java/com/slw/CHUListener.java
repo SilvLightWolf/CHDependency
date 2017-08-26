@@ -1,10 +1,13 @@
 package com.slw;
 
 import com.comphenix.protocol.events.PacketEvent;
+import com.gmail.nossr50.events.experience.McMMOPlayerLevelUpEvent;
 import com.laytonsmith.commandhelper.CommandHelperPlugin;
 import com.laytonsmith.core.events.Driver;
 import com.laytonsmith.core.events.EventUtils;
 import com.slw.event.basic.BasicAPI;
+import com.slw.event.betonquest.BetonquestAPI;
+import com.slw.event.mcmmo.McMMOAPI;
 import com.slw.event.skillapi.SkillapiAPI;
 import com.sucy.skill.api.event.*;
 import org.bukkit.Bukkit;
@@ -13,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.AreaEffectCloudApplyEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
+import pl.betoncraft.betonquest.api.PlayerConversationStartEvent;
 
 /**
  * Created by User on 2017-08-04.
@@ -139,7 +143,34 @@ public class CHUListener {
         }
 
         public static void unregister() {
+            PlayerConversationStartEvent.getHandlerList().unregister(listener);
+        }
 
+        @EventHandler
+        public void onConversationStart(PlayerConversationStartEvent e){
+            EventUtils.TriggerListener(Driver.EXTENSION, "chu_betonquest_conversation_start",
+                    new BetonquestAPI.CHUConversationStartEvent(e));
+        }
+    }
+
+    public static class McMMOEventListener implements Listener{
+
+        private static McMMOEventListener listener;
+
+        public static void register(){
+            if(listener == null)
+                listener = new McMMOEventListener();
+            CommandHelperPlugin.self.registerEvents(listener);
+        }
+
+        public static void unregister(){
+            McMMOPlayerLevelUpEvent.getHandlerList().unregister(listener);
+        }
+
+        @EventHandler
+        public void onLevelUP(McMMOPlayerLevelUpEvent e){
+            EventUtils.TriggerListener(Driver.EXTENSION, "chu_mcmmo_levelup",
+                    new McMMOAPI.CHUMcMMOLevelUpEvent(e));
         }
     }
 

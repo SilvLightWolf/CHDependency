@@ -7,6 +7,7 @@ import com.laytonsmith.annotations.api;
 import com.laytonsmith.core.Static;
 import com.laytonsmith.core.constructs.*;
 import com.laytonsmith.core.environments.Environment;
+import com.laytonsmith.core.exceptions.CRE.CREException;
 import com.laytonsmith.core.exceptions.CRE.CREThrowable;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import com.laytonsmith.core.functions.AbstractFunction;
@@ -29,7 +30,7 @@ public class Skills {
 
         @SuppressWarnings("unchecked")
         public Class<? extends CREThrowable>[] thrown() {
-            return new Class[0];
+            return new Class[]{CREException.class};
         }
 
         public boolean isRestricted() {
@@ -83,7 +84,7 @@ public class Skills {
 
         @SuppressWarnings("unchecked")
         public Class<? extends CREThrowable>[] thrown() {
-            return new Class[0];
+            return new Class[]{CREException.class};
         }
 
         public boolean isRestricted() {
@@ -134,7 +135,7 @@ public class Skills {
 
         @SuppressWarnings("unchecked")
         public Class<? extends CREThrowable>[] thrown() {
-            return new Class[0];
+            return new Class[]{CREException.class};
         }
 
         public boolean isRestricted() {
@@ -179,6 +180,63 @@ public class Skills {
 
         public String docs() {
             return "boolean (playerName, skillName[, Level]) give Skill to player, but this skill is removed after reloading.";
+        }
+    }
+
+    @api
+    public static class CHU_cast_skill extends AbstractFunction {
+
+        @SuppressWarnings("unchecked")
+        public Class<? extends CREThrowable>[] thrown() {
+            return new Class[]{CREException.class};
+        }
+
+        public boolean isRestricted() {
+            return false;
+        }
+
+        public Boolean runAsync() {
+            return null;
+        }
+
+        public Construct exec(Target t, Environment env, Construct... args) throws ConfigRuntimeException {
+
+            if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
+
+            OfflinePlayer p = ((BukkitMCPlayer) Static.GetPlayer(args[0].val(), t))._Player();
+            if(p == null) return CBoolean.FALSE;
+
+            for(PlayerSkill s : SkillAPI.getPlayerAccountData(p).getActiveData().getSkills()){
+
+                if(s.getLevel() >= 1){
+                    if(s.getData().getName().equalsIgnoreCase(args[1].val())){
+                        if(s.getData().canCast()){
+                            SkillAPI.getPlayerAccountData(p).getActiveData().cast(s);
+                            return CBoolean.TRUE;
+                        }
+                    }
+                }
+
+            }
+
+
+            return CBoolean.FALSE;
+        }
+
+        public Version since() {
+            return new SimpleVersion(1, 1, 0);
+        }
+
+        public String getName() {
+            return "chu_skillapi_cast_skill";
+        }
+
+        public Integer[] numArgs() {
+            return new Integer[]{ 2 };
+        }
+
+        public String docs() {
+            return "Boolean (playerName, skillName)";
         }
     }
 

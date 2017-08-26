@@ -60,7 +60,7 @@ public class SkillAPIManage {
 
         arr.set("combo", String.valueOf(sk.getCombo()));
         arr.set("skillReq", sk.getSkillReq());
-        arr.set("maxLevel", String.valueOf(sk.getMaxLevel()));
+        arr.set("maxlevel", String.valueOf(sk.getMaxLevel()));
         arr.set("message", sk.getMessage());
         arr.set("name", sk.getName());
         arr.set("key", sk.getKey());

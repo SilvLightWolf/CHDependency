@@ -15,6 +15,7 @@ import com.laytonsmith.core.Static;
 import com.laytonsmith.core.constructs.*;
 import com.laytonsmith.core.environments.Environment;
 import com.laytonsmith.core.exceptions.CRE.CRECastException;
+import com.laytonsmith.core.exceptions.CRE.CREException;
 import com.laytonsmith.core.exceptions.CRE.CREThrowable;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import com.laytonsmith.core.functions.AbstractFunction;
@@ -44,7 +45,7 @@ public class Blocks {
 
         @SuppressWarnings("unchecked")
         public Class<? extends CREThrowable>[] thrown() {
-            return new Class[0];
+            return new Class[]{CREException.class};
         }
 
         public boolean isRestricted() {
@@ -308,7 +309,7 @@ public class Blocks {
 
         @SuppressWarnings("unchecked")
         public Class<? extends CREThrowable>[] thrown() {
-            return new Class[0];
+            return new Class[]{CREException.class};
         }
 
         public boolean isRestricted() {

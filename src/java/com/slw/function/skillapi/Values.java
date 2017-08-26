@@ -4,15 +4,19 @@ import com.laytonsmith.PureUtilities.SimpleVersion;
 import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.abstraction.bukkit.entities.BukkitMCPlayer;
 import com.laytonsmith.annotations.api;
+import com.laytonsmith.core.Static;
 import com.laytonsmith.core.constructs.*;
 import com.laytonsmith.core.environments.CommandHelperEnvironment;
 import com.laytonsmith.core.environments.Environment;
+import com.laytonsmith.core.exceptions.CRE.CREException;
 import com.laytonsmith.core.exceptions.CRE.CREThrowable;
 import com.laytonsmith.core.exceptions.ConfigRuntimeException;
 import com.laytonsmith.core.functions.AbstractFunction;
 import com.slw.DataHandling;
 import com.slw.compatibility.SkillAPIManage;
 import com.sucy.skill.dynamic.DynamicSkill;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -27,7 +31,7 @@ public class Values {
 
         @SuppressWarnings("unchecked")
         public Class<? extends CREThrowable>[] thrown() {
-            return new Class[0];
+            return new Class[]{CREException.class};
         }
 
         public boolean isRestricted() {
@@ -42,8 +46,12 @@ public class Values {
 
             if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
 
-            Player p = ((BukkitMCPlayer)env.getEnv(CommandHelperEnvironment.class).GetPlayer())._Player();
-            Object o = DynamicSkill.getCastData(p).get(args[1].val());
+            Player p = ((BukkitMCPlayer) Static.GetPlayer(args[0].val(), t))._Player();
+            Object o = null;
+            for(String s : DynamicSkill.getCastData(p).keySet()){
+                if(s.equalsIgnoreCase(args[1].val())) o = DynamicSkill.getCastData(p).get(s);
+            }
+            if(o == null){ o = -1; DynamicSkill.getCastData(p).put(args[1].val(), Double.parseDouble("-1")); }
             if(!DataHandling.isNumeric(o)) return CBoolean.FALSE;
 
             return new CDouble(o.toString(), t);
@@ -72,7 +80,7 @@ public class Values {
 
         @SuppressWarnings("unchecked")
         public Class<? extends CREThrowable>[] thrown() {
-            return new Class[0];
+            return new Class[]{CREException.class};
         }
 
         public boolean isRestricted() {
@@ -87,13 +95,11 @@ public class Values {
 
             if(!SkillAPIManage.skillapiPlay) return CVoid.VOID;
 
-            Player p = ((BukkitMCPlayer)env.getEnv(CommandHelperEnvironment.class).GetPlayer())._Player();
+            Player p = ((BukkitMCPlayer) Static.GetPlayer(args[0].val(), t))._Player();
             HashMap<String, Object> data = DynamicSkill.getCastData(p);
 
-            if(!data.keySet().contains(args[1].val())) return CBoolean.FALSE;
-
             if(!DataHandling.isNumeric(args[2].val())) return CBoolean.FALSE;
-            data.put(args[1].val(), args[2].val());
+            data.put(args[1].val(), Double.valueOf(args[2].val()));
 
             return CBoolean.TRUE;
         }
