@@ -1,2 +1,2 @@
-# CHUltra
+# CHDependency
 Minecraft - Extension for CommandHelper
